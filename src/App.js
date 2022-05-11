@@ -28,12 +28,12 @@ class MathGame extends React.Component {
       variable2: 0,
       operand: '',
       result: 0,
-      maxVariable: 16,
+      maxVariable: 13,
       playerInput: "",
       playerResult: "",
     }
   }
-  
+
   componentDidMount() {
     // 
     // refreshProblem preps data for a new question
@@ -47,7 +47,7 @@ class MathGame extends React.Component {
       <div>
         <h1 className={ this.state.playerResult === "Incorrect" ? "incorrect" : "correct" } > 
           {this.state.variable1} {this.state.operand} {this.state.variable2} = &nbsp; 
-        <input className="user-input"
+        <input inputmode="numeric" className="user-input"
           onKeyUp={this.parseInput}
           onChange={this.parseOnChange} 
           value={this.state.playerInput}
@@ -63,7 +63,8 @@ class MathGame extends React.Component {
 
     const operands = ['+', '-', '*',];
     const thisOperand = operands[Math.floor(Math.random() * 3)];
-
+    //const thisOperand = '*';
+    
     let a1 = Math.floor(Math.random() * this.state.maxVariable);
     let a2 = Math.floor(Math.random() * this.state.maxVariable);
     let myresult = '';
