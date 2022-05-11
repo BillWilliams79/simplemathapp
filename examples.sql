@@ -9,6 +9,11 @@ CREATE TABLE IF NOT EXISTS Math_User (
     PRIMARY KEY (Id)
 );
 
+/* rename table, two formats */
+/*RENAME TABLE Math_User TO Math_Wizard;
+ALTER TABLE Math_Wizard RENAME Math_User;
+*/
+
 /* Modify existing table to add a column */
 ALTER TABLE Math_User 
 ADD COLUMN Favorite_Color VARCHAR(16);
@@ -63,13 +68,15 @@ WHERE
     Id = 4;
 
 /* Results child table with foreign key to parent table (Math_User) */
-/* the FK will auto update on changes and delete associated child tables if the parent row is deleted */
+/* the FK will auto update on changes and delete associated child rows if the parent row is deleted */
+/* TIMESTAMP stores value in UTC */
 CREATE TABLE IF NOT EXISTS Results (
     Id INT PRIMARY KEY AUTO_INCREMENT,
     Score INT NOT NULL,
     Tries INT NOT NULL,
     Example_Enum ENUM('Banana', 'Apple', 'Pepper'),
     User_Id INT NOT NULL,
+    Created TIMESTAMP,
     FOREIGN KEY (User_Id)
         REFERENCES Math_User (Id)
         ON UPDATE CASCADE ON DELETE CASCADE
